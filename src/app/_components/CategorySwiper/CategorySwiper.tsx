@@ -9,8 +9,10 @@ import { Autoplay, Pagination } from 'swiper/modules'
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/pagination'
+import Image from 'next/image'
+import { Category } from '@/Types/product.type'
 
-const CategorySwiper = ({ Categories }) => {
+const CategorySwiper = ({ Categories }: {Categories: Category[]}) => {
     return (
         <div>
             <Swiper
@@ -31,10 +33,9 @@ const CategorySwiper = ({ Categories }) => {
                 },
                 }}
             >
-            {Array.isArray(Categories) &&
-                Categories.map((category, idx) => (
+            {Categories.map((category:Category, idx:number) => (
                     <SwiperSlide key={idx} className="text-center">
-                        <img
+                        <Image width={500} height={500}
                         src={category.image}
                         alt={category.name}
                         className="h-[200px] w-full object-cover"

@@ -1,4 +1,5 @@
 
+import { Product } from "@/Types/product.type";
 import GetAllProducts from "../apis/GetAllProducts";
 import CategorySlider from "./_components/CategorySlider/CategorySlider";
 import HomeCard from "./_components/HomeCard/HomeCard";
@@ -6,7 +7,7 @@ import MainSlider from "./_components/MainSlider/MainSlider";
 
 export default async function Home() {
 
-  const data = await GetAllProducts()
+  const data:Product[] = await GetAllProducts()
 
   return (
     
@@ -14,7 +15,7 @@ export default async function Home() {
       <MainSlider/> 
       <CategorySlider/>
       <div className="flex flex-wrap">
-        {data.map((product, idx) => (<HomeCard key={idx} product={product} />))}
+        {data.map((product:Product, idx:number) => (<HomeCard key={idx} product={product} />))}
       </div>
     </section>
 

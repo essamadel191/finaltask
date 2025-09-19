@@ -1,11 +1,12 @@
 import GetAllCategories from '@/apis/GetAllCategories'
 import React from 'react'
 import CategorySwiper from '../CategorySwiper/CategorySwiper'
+import { Category } from '@/Types/category.type'
 
 const CategorySlider = async () => {
-  const {data} = await GetAllCategories()
+  const {data}:{data:Category[]} = await GetAllCategories()
 
-  console.log(data)
+ console.log(data)
 
   return (
     <div className='mb-3 '>

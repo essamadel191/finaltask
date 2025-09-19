@@ -7,9 +7,10 @@ import {
   CardHeader,
 } from "@/components/ui/card"
 import Link from 'next/link';
+import { Product } from '@/Types/product.type';
 
 
-const HomeCard = ({product}) => {
+const HomeCard = ({product} : {product : Product}) => {
     
   return (
     <div key={product.id} className="w-full md:w-1/2 lg:w-1/4 p-3">
@@ -17,7 +18,7 @@ const HomeCard = ({product}) => {
             <Card className="group p-2 border-0 rounded-2xl shadow-none hover:shadow-2xl hover:shadow-green-300 hover:border-green-300 transition-all duration-500 cursor-pointer">
                 <Link href={`/productDetails/${product.id}`}>
                     <CardHeader className="p-0">
-                        <img src={product.imageCover} alt="" />
+                        <Image width={500} height={500} src={product.imageCover} alt={product.title} />
                     </CardHeader>
                     <CardContent className="p-0">
                         <p className="font-bold text-green-500 mb-3">{product.category.name}</p>
