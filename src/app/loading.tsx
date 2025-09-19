@@ -8,3 +8,10 @@ export default function Loading() {
     </div>
   );
 }
+export function Loading2() {
+  return (
+    <div className="flex justify-center items-center">
+      <Spinner variant='circle' /> 
+    </div>
+  );
+}

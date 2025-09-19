@@ -1,3 +1,5 @@
+"use server"
+
 import { Product } from "@/Types/product.type"
 
 export default async function GetSingleProduct(id:string){

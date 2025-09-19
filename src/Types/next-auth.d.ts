@@ -16,6 +16,11 @@ declare module "next-auth" {
 
 
   interface Session {
-    user: User.user
+    user: {
+      name: string
+      email: string
+      role: string
+    }
+    token?: string   // optional if you also want to expose token on session
   }
 }

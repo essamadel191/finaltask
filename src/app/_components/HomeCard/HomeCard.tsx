@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card"
 import Link from 'next/link';
 import { Product } from '@/Types/product.type';
+import AddBtnCart from '../AddBtnCart/AddBtnCart';
 
 
 const HomeCard = ({product} : {product : Product}) => {
@@ -30,14 +31,7 @@ const HomeCard = ({product} : {product : Product}) => {
                     </CardContent>
                 </Link>
                 <CardFooter className="p-0 flex justify-between text-center relative overflow-hidden">
-                    <button className="
-                            px-4 py-2 bg-[#22db14] text-white rounded-md text-sm w-[80%] 
-                            transform translate-y-10 opacity-0 
-                            group-hover:translate-y-0 group-hover:opacity-100 
-                            transition-all duration-500 ease-in-out
-                        ">
-                        + Add
-                    </button>
+                    <AddBtnCart id={product.id}/>
                     <button><i className="fa-regular fa-heart mr-3 text-2xl"></i></button>
                 </CardFooter>
             </Card>  
