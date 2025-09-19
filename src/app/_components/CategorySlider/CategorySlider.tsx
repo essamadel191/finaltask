@@ -6,7 +6,7 @@ import { Category } from '@/Types/category.type'
 const CategorySlider = async () => {
   const {data}:{data:Category[]} = await GetAllCategories()
 
- console.log(data)
+ //console.log(data)
 
   return (
     <div className='mb-3 '>
