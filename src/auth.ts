@@ -48,5 +48,25 @@ export const authOptions:AuthOptions = {
             }
 
         })
-    ]
+    ],
+
+    callbacks:{
+
+            async session({ session, token }) {
+                if(token){
+                    session.user = token?.user
+                }
+
+                return session
+            },
+
+        async jwt({ token, user }) {
+            if(user){
+                token.user = user?.user
+                token.token = user?.token
+            }
+
+            return token
+        }
+    }
 }
