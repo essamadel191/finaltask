@@ -13,31 +13,31 @@ import AddBtnCart from '../AddBtnCart/AddBtnCart';
 
 const HomeCard = ({product} : {product : Product}) => {
     
-  return (
-    <div key={product.id} className="w-full md:w-1/2 lg:w-1/4 p-3">
-        <div className="inner">
-            <Card className="group p-2 border-0 rounded-2xl shadow-none hover:shadow-2xl hover:shadow-green-300 hover:border-green-300 transition-all duration-500 cursor-pointer">
-                <Link href={`/productDetails/${product.id}`}>
-                    <CardHeader className="p-0">
-                        <Image width={500} height={500} src={product.imageCover} alt={product.title} />
-                    </CardHeader>
-                    <CardContent className="p-0">
-                        <p className="font-bold text-green-500 mb-3">{product.category.name}</p>
-                        <p className="line-clamp-1 mb-2">{product.title}</p>
-                        <div className="w-full flex justify-between items-center">
-                            <p>{product.price} EGP</p>
-                            <p>{product.ratingsAverage} <i className="fa-solid fa-star text-yellow-300"></i></p>
-                        </div>
-                    </CardContent>
-                </Link>
-                <CardFooter className="p-0 flex justify-between text-center relative overflow-hidden">
-                    <AddBtnCart id={product.id}/>
-                    <button><i className="fa-regular fa-heart mr-3 text-2xl"></i></button>
-                </CardFooter>
-            </Card>  
+    return (
+        <div key={product.id} className="w-full md:w-1/2 lg:w-1/4 p-3">
+            <div className="inner">
+                <Card className="group p-2 border-0 rounded-2xl shadow-none hover:shadow-2xl hover:shadow-green-300 hover:border-green-300 transition-all duration-500 cursor-pointer">
+                    <Link href={`/productDetails/${product.id}`}>
+                        <CardHeader className="p-0">
+                            <Image width={500} height={500} src={product.imageCover} alt={product.title} />
+                        </CardHeader>
+                        <CardContent className="p-0">
+                            <p className="font-bold text-green-500 mb-3">{product.category.name}</p>
+                            <p className="line-clamp-1 mb-2">{product.title}</p>
+                            <div className="w-full flex justify-between items-center">
+                                <p>{product.price} EGP</p>
+                                <p>{product.ratingsAverage} <i className="fa-solid fa-star text-yellow-300"></i></p>
+                            </div>
+                        </CardContent>
+                    </Link>
+                    <CardFooter className="p-0 flex justify-between text-center relative overflow-hidden">
+                        <AddBtnCart id={product.id}/>
+                        <button><i className="fa-regular fa-heart mr-3 text-2xl"></i></button>
+                    </CardFooter>
+                </Card>  
+            </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default HomeCard

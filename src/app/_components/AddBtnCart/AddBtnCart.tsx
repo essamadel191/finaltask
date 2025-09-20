@@ -1,6 +1,8 @@
 "use client"
-import { AddToCart } from '@/CartActions/addToCart'
-import React from 'react'
+
+import { cartContext } from '@/Context/CartContext'
+import { GetMyToken } from '@/utilities/token'
+import React, { useContext } from 'react'
 import { toast } from 'sonner'
 
 interface AddBtnCartProps {
@@ -9,21 +11,33 @@ interface AddBtnCartProps {
 }
 
 const AddBtnCart: React.FC<AddBtnCartProps> = ({ id, variant = "HomeCard" }) => {
-    async function handleAddCart() {
-        const data = await AddToCart(id)
-        //console.log(data)
 
-        if(data.status === "success"){
-            toast.success(data.message,{
-                    position: 'top-center',
-                    duration: 3000
-                })
+    const {addProductToCart} = useContext(cartContext)
+
+    async function handleAddCart() {
+        const token = await GetMyToken()
+
+        if (!token) {
+        toast.error("You must be logged in to add items to cart", {
+            position: 'top-center',
+            duration: 3000,
+        })
+        return
         }
-        else{
-            toast.error(data.message,{
-                    position: 'top-center',
-                    duration: 3000
-                })
+        
+
+        const data = await addProductToCart(id)
+
+        if (data?.status === "success") {
+        toast.success(data.message, {
+            position: 'top-center',
+            duration: 3000,
+        })
+        } else {
+        toast.error(data?.message || "Something went wrong", {
+            position: 'top-center',
+            duration: 3000,
+        })
         }
     }
 
@@ -37,9 +51,7 @@ const AddBtnCart: React.FC<AddBtnCartProps> = ({ id, variant = "HomeCard" }) => 
 
     return (
         <button
-        className={`${baseClasses} ${
-            variant === "HomeCard" ? cardClasses : detailsClasses
-        }`}
+        className={`${baseClasses} ${variant === "HomeCard" ? cardClasses : detailsClasses}`}
         onClick={handleAddCart}
         >
         + Add

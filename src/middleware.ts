@@ -7,10 +7,10 @@ export async function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl
 
     const authPage = ["/login", "/register"]
-    const routes = ["/", "/cart", "/wishlist", "/categories", "/productDetails"]
+    const routes = [ "/cart", "/wishlist", "/productDetails"]
 
-    if(!token && routes.includes(pathname)){
-        return NextResponse.redirect(new URL("/login", request.url))
+    if (!token && routes.some(route => pathname.startsWith(route))) {
+    return NextResponse.redirect(new URL("/login", request.url))
     }
     if(token && authPage.includes(pathname)){
         return NextResponse.redirect(new URL("/", request.url))
@@ -30,5 +30,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/", "/cart", "/wishlist", "/categories", "/productDetails", "/login", "/register"],
+    matcher: [ "/cart" ,"/wishlist", "/productDetails/:path*", "/login", "/register"],
 }

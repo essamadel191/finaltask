@@ -1,14 +1,20 @@
 "use client"
 import Link from 'next/link'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import logoImg from './../../../../public/Assets/freshcart-logo.svg'
 import { signOut, useSession } from 'next-auth/react'
 import { Loading2 } from './../../loading';
+import { cartContext } from '@/Context/CartContext'
+import { useRouter } from 'next/navigation'
+
 
 const Navbar = () => {
     const { data: session, status } = useSession()
     const [isOpen, setIsOpen] = useState(false)
+    const { numOfCart } = useContext(cartContext)
+
+    const router = useRouter()
 
     return (
         <div className="bg-slate-100 p-5">
@@ -33,13 +39,14 @@ const Navbar = () => {
                 <li><Link href={"/"}>Home</Link></li>
                 <li><Link href={"/cart"}>Cart</Link></li>
                 <li><Link href={"/wishlist"}>Wish List</Link></li>
-                <li><Link href={"/categories"}>Categories</Link></li>
+
+                
                 </>
             )}
-
-            {status === "loading" && <Loading2 />}
+            <li><Link href={"/categories"}>Categories</Link></li>
             <li><Link href={"/products"}>Products</Link></li>
             <li><Link href={"/brands"}>Brands</Link></li>
+            {status === "loading" && <Loading2 />}
             </ul>
 
             {/* Auth Actions (Desktop) */}
@@ -47,10 +54,10 @@ const Navbar = () => {
             {status === 'authenticated' ? (
                 <>
                 {/* Cart Icon */}
-                <div className="relative inline-block mr-2">
+                <div className="relative inline-block mr-2 cursor-pointer" onClick={() => router.push("/cart")}>
                     <i className="fa-solid fa-cart-shopping text-3xl text-gray-600"></i>
                     <span className="absolute -top-2 -right-2 bg-[#4fa74f] text-white text-xs font-bold w-6 h-6 flex items-center justify-center rounded-md">
-                    0
+                    {numOfCart}
                     </span>
                 </div>
 
@@ -90,7 +97,8 @@ const Navbar = () => {
 
             {status === 'authenticated' ? (
                 <>
-                <div className="relative inline-block mr-2">
+                
+                <div className="relative inline-block mr-2 cursor-pointer" onClick={() => router.push("/cart")}>
                     <i className="fa-solid fa-cart-shopping text-2xl text-gray-600"></i>
                     <span className="absolute -top-2 -right-2 bg-[#4fa74f] text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-md">
                     0
