@@ -10,14 +10,16 @@ import React, { createContext, useEffect, useState } from 'react'
 
 
 export const cartContext = createContext<CartContextType>({
-  numOfCart: 0,
-  totalPrice: 0,
-  products: [],
-  isLoading:false,
-  addProductToCart: async () => null,
-  removeCartItem:async () => null,
-  udateCart:async () => null,
-  clearCart:async () => null
+    numOfCart: 0,
+    totalPrice: 0,
+    products: [],
+    isLoading:false,
+    addProductToCart: async () => null,
+    removeCartItem:async () => null,
+    udateCart:async () => null,
+    clearCart:async () => null,
+    cartID:"",
+    afterPayment:async () => null
 })
 
 const CartContextProvider = ({children}:{children:React.ReactNode}) => {
@@ -26,6 +28,7 @@ const CartContextProvider = ({children}:{children:React.ReactNode}) => {
     const [totalPrice , SetTotalPrice] = useState(0)
     const [products, setProducts] = useState<ProductCart[]>([])
     const [isLoading , setIsLoading] = useState(false)
+    const [cartID , setcartID] = useState("")
 
 
     async function addProductToCart(id:string){
@@ -52,6 +55,7 @@ const CartContextProvider = ({children}:{children:React.ReactNode}) => {
             SetNumOfCart(data.numOfCartItems)
             SetTotalPrice(data.data.totalCartPrice)
             setProducts(data.data.products)
+            setcartID(data.cartId)
 
             setIsLoading(false)
         //console.log(data)
@@ -92,6 +96,13 @@ const CartContextProvider = ({children}:{children:React.ReactNode}) => {
         }
     }
 
+    async function afterPayment() {
+        setcartID("")
+        SetNumOfCart(0)
+        SetTotalPrice(0)
+        setProducts([])
+    }
+
     async function clearCart() {
         try {
             const data = await clearCartAction()
@@ -109,20 +120,22 @@ const CartContextProvider = ({children}:{children:React.ReactNode}) => {
         getUserCart()
     },[])
 
-  return (
-    <cartContext.Provider value={{
-        numOfCart,
-        products,
-        totalPrice,
-        isLoading,
-        addProductToCart,
-        removeCartItem,
-        udateCart,
-        clearCart
-    }}>
-        {children}
-    </cartContext.Provider>
-  )
+    return (
+        <cartContext.Provider value={{
+            numOfCart,
+            products,
+            totalPrice,
+            isLoading,
+            addProductToCart,
+            removeCartItem,
+            udateCart,
+            clearCart,
+            cartID,
+            afterPayment
+        }}>
+            {children}
+        </cartContext.Provider>
+    )
 }
 
 export default CartContextProvider

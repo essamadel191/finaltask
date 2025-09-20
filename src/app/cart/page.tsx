@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { ProductCart } from '@/Types/cart.type'
 import  Image  from 'next/image';
 import { toast } from 'sonner'
+import Link from 'next/link'
 
 const Cart = async () => {
 
@@ -67,7 +68,9 @@ const Cart = async () => {
         <p className='my-3 text-green-600 font-mono'>Total Price : {totalPrice} EGP</p>
         <div className='mb-2 mt-2 flex justify-between items-center'>
           <Button onClick={clearCart}>Clear Cart</Button>
-          <Button variant="destructive">Check Out</Button>
+          <Button variant="destructive">
+            <Link href={"/payment"}>Check Out</Link>
+          </Button>
         </div>
         
         <div className='allCartProducts'>

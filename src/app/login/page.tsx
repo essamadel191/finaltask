@@ -11,6 +11,7 @@ import axios, { AxiosError } from "axios";
 import { toast } from "sonner"
 import { useRouter } from 'next/navigation'
 import {signIn} from 'next-auth/react'
+import Link from 'next/link'
 
 const Login = () => {
 
@@ -113,7 +114,12 @@ const Login = () => {
             )}
           />
 
-          <Button className='w-[25%] mt-4'>Login</Button>
+          <div className="w-full text-right">
+            <Link href="/forgetpassword" className="underline text-sm text-blue-600 hover:text-blue-800">
+              Forget Password?
+            </Link>
+          </div>
+          <Button className='w-[25%] mt-1'>Login</Button>
         </form>
       </Form>
     </div>

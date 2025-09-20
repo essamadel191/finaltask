@@ -40,11 +40,11 @@ const Navbar = () => {
                 <li><Link href={"/cart"}>Cart</Link></li>
                 <li><Link href={"/wishlist"}>Wish List</Link></li>
 
-                
+                <li><Link href={"/allorders"}>All Orders</Link></li>
                 </>
             )}
-            <li><Link href={"/categories"}>Categories</Link></li>
             <li><Link href={"/products"}>Products</Link></li>
+            <li><Link href={"/categories"}>Categories</Link></li>
             <li><Link href={"/brands"}>Brands</Link></li>
             {status === "loading" && <Loading2 />}
             </ul>

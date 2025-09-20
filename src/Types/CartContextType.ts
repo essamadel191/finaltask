@@ -9,4 +9,6 @@ export interface CartContextType {
   removeCartItem: (id: string) => Promise<any>;
   udateCart: (id: string,count:number) => Promise<any>;
   clearCart:() => Promise<any>;
+  cartID:string
+  afterPayment:() => Promise<any>;
 }
